@@ -55,7 +55,7 @@
                     </div>
                     <h3>Luxury Sapphire Co-ord Set</h3>
                     <p class="price">₹1,000</p>
-                    <button class="btn-buy" onclick="handlePayment('1000', 'Sapphire Co-ord Set')">Buy Product</button>
+                    <button class="btn-buy" onclick="handlePayment('1000', 'Luxury Sapphire Co-ord Set')">Buy Product</button>
                 </div>
 
                 <div class="shop-card">
@@ -69,7 +69,7 @@
 
                 <div class="shop-card">
                     <div class="img-wrapper">
-                        <img src="1000003493.jpg" alt="Premium Tailored Outfit">
+                        <img src="1000003493.jpg" alt="Signature Designer Gown">
                     </div>
                     <h3>Signature Designer Gown</h3>
                     <p class="price">₹1,500</p>
@@ -100,56 +100,55 @@
             </div>
 
             <div id="form-step-view" style="display: none;">
-                <h3>Delivery & Order Confirmation</h3>
-                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Please fill in your details to auto-generate your verified store receipt and notify the designer.</p>
+                <h3>Delivery Details</h3>
+                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Enter your details to register your order and generate your official invoice receipt.</p>
                 
                 <form action="https://formspree.io/f/xnqeazbg" method="POST" id="order-form" onsubmit="submitOrderForm(event)">
-                    
                     <input type="hidden" name="Order ID" id="hidden-order-id">
                     <input type="hidden" name="Product Name" id="hidden-product-name">
                     <input type="hidden" name="Price Paid" id="hidden-price-paid">
-                    <input type="hidden" name="Payment Status" value="Success (UPI)">
+                    <input type="hidden" name="Payment Status" value="Success (Direct UPI Verification)">
 
                     <div class="form-group">
-                        <label>Your Full Name</label>
-                        <input type="text" name="Customer Name" required placeholder="Enter your name">
+                        <label>Your Name</label>
+                        <input type="text" name="Customer Name" required placeholder="Enter full name">
                     </div>
                     <div class="form-group">
-                        <label>Contact Mobile Number</label>
-                        <input type="tel" name="Customer Phone" required placeholder="Enter phone number">
+                        <label>Contact Phone</label>
+                        <input type="tel" name="Customer Phone" required placeholder="Enter active mobile number">
                     </div>
                     <div class="form-group">
-                        <label>Full Delivery Address</label>
-                        <textarea name="Shipping Address" rows="3" required placeholder="Enter full address with pincode"></textarea>
+                        <label>Shipping Address</label>
+                        <textarea name="Shipping Address" rows="3" required placeholder="Enter full home address with pincode"></textarea>
                     </div>
 
-                    <button type="submit" class="btn-submit-order">GENERATE & SEND RECEIPT</button>
+                    <button type="submit" class="btn-submit-order">GENERATE STORE RECEIPT</button>
                 </form>
             </div>
 
             <div id="receipt-step-view" style="display: none;">
                 <div class="receipt-success-icon">✔</div>
-                <h3 class="receipt-headline">Order Logged Successfully!</h3>
-                <p class="receipt-sub">A receipt copy has been sent to the studio inbox.</p>
+                <h3 class="receipt-headline">Order Confirmed!</h3>
+                <p class="receipt-sub">A verification receipt copy has been generated for you below:</p>
                 
                 <div class="formal-receipt-box">
                     <div class="receipt-row"><strong>Boutique:</strong> <span>Little Luxury</span></div>
                     <div class="receipt-row"><strong>Order ID:</strong> <span id="receipt-id" style="color: #ca9f43; font-weight: 600;">--</span></div>
                     <div class="receipt-row"><strong>Customer:</strong> <span id="receipt-customer">--</span></div>
-                    <div class="receipt-row"><strong>Product:</strong> <span id="receipt-product">--</span></div>
+                    <div class="receipt-row"><strong>Item Ordered:</strong> <span id="receipt-product">--</span></div>
                     <div class="receipt-row"><strong>Total Paid:</strong> <span id="receipt-price">--</span></div>
-                    <div class="receipt-row"><strong>Status:</strong> <span class="status-badge">Payment Received</span></div>
+                    <div class="receipt-row"><strong>Status:</strong> <span class="status-badge">Payment Verified</span></div>
                 </div>
 
                 <div class="confirmation-action-box">
-                    <p><strong>FINAL STEP:</strong> Click the green button below to send your payment screenshot directly to our studio thread on WhatsApp to clear sizing specifications.</p>
+                    <p><strong>FINAL STEP:</strong> Tap the button below to send your payment confirmation screenshot straight to our design studio on WhatsApp.</p>
                     <a id="whatsapp-confirm-btn" href="#" target="_blank" class="btn-whatsapp-send">
-                        💬 CHAT WITH DESIGNER ON WHATSAPP
+                        💬 SHARE CONFIRMATION ON WHATSAPP
                     </a>
                 </div>
             </div>
             
-            <p class="modal-footer-note">Secure system powered by Little Luxury Studio.</p>
+            <p class="modal-footer-note">Secure network connection powered by Little Luxury Studio.</p>
         </div>
     </div>
 
@@ -188,12 +187,10 @@
             currentAmount = amount;
             currentProduct = productName;
             
-            // Reset Views
             document.getElementById('payment-step-view').style.display = "block";
             document.getElementById('form-step-view').style.display = "none";
             document.getElementById('receipt-step-view').style.display = "none";
 
-            // Generate Order ID string
             generatedOrderID = "LL-" + Math.floor(100000 + Math.random() * 900000);
             
             const note = encodeURIComponent("Order " + generatedOrderID + " for " + productName);
@@ -214,7 +211,6 @@
             document.getElementById('payment-step-view').style.display = "none";
             document.getElementById('form-step-view').style.display = "block";
 
-            // Inject tracking elements into hidden inputs for Formspree to capture
             document.getElementById('hidden-order-id').value = generatedOrderID;
             document.getElementById('hidden-product-name').value = currentProduct;
             document.getElementById('hidden-price-paid').value = "₹" + currentAmount;
@@ -228,13 +224,11 @@
             const customerPhone = formData.get('Customer Phone');
             const shippingAddress = formData.get('Shipping Address');
 
-            // Send full order array asynchronously behind the scenes to Formspree email server
             fetch(form.action, {
                 method: form.method,
                 body: formData,
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
-                // Move display to Final Confirmation Receipt screen
                 document.getElementById('form-step-view').style.display = "none";
                 document.getElementById('receipt-step-view').style.display = "block";
                 
@@ -243,20 +237,19 @@
                 document.getElementById('receipt-product').innerText = currentProduct;
                 document.getElementById('receipt-price').innerText = "₹" + currentAmount;
 
-                // Configure backup direct text verification for WhatsApp
                 const whatsappText = encodeURIComponent(
-                    `✨ *LITTLE LUXURY CONFIRMED ORDER* ✨\n\n` +
+                    `✨ *LITTLE LUXURY ORDER CONFIRMATION* ✨\n\n` +
                     `🆔 *Order ID:* ${generatedOrderID}\n` +
                     `👤 *Customer Name:* ${customerName}\n` +
-                    `📞 *Phone:* ${customerPhone}\n` +
-                    `👗 *Product Name:* ${currentProduct}\n` +
-                    `💰 *Total Paid:* ₹${currentAmount}\n` +
+                    `📞 *Phone Number:* ${customerPhone}\n` +
+                    `👗 *Product Selection:* ${currentProduct}\n` +
+                    `💰 *Total Amount:* ₹${currentAmount}\n` +
                     `📍 *Shipping Address:* ${shippingAddress}\n\n` +
-                    `Je is my attached payment screenshot below:`
+                    `I have attached my transaction screenshot below:`
                 );
                 document.getElementById('whatsapp-confirm-btn').href = `https://wa.me/919322289023?text=${whatsappText}`;
             }).catch(error => {
-                alert("Form submission error. Please check your internet connection.");
+                alert("Something went wrong. Please check your data connection.");
             });
         }
 
@@ -273,4 +266,3 @@
     </script>
 </body>
 </html>
-
