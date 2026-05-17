@@ -1,223 +1,53 @@
-/* Base Layout Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #ffffff;
-    color: #000000;
-}
-
-/* Announcement Banner */
-.announcement-bar {
-    background-color: #000000;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 12px;
-    letter-spacing: 2px;
-}
-
-/* Header & Tabs Navigation */
-.main-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 25px 0 15px 0;
-    border-bottom: 1px solid #f2f2f2;
-    background: #ffffff;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.logo {
-    font-size: 28px;
-    letter-spacing: 5px;
-    margin-bottom: 15px;
-    font-weight: 400;
-}
-.nav-tabs {
-    display: flex;
-    gap: 40px;
-}
-.tab-link {
-    background: none;
-    border: none;
-    font-size: 14px;
-    letter-spacing: 1.5px;
-    color: #777;
-    padding-bottom: 8px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s ease;
-    border-bottom: 2px solid transparent;
-}
-.tab-link:hover {
-    color: #000;
-}
-.tab-link.active {
-    color: #000;
+/* Premium Form Interface Look Extensions */
+#form-step-view h3 {
+    font-size: 18px;
     font-weight: 500;
-    border-bottom: 2px solid #000;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
 }
-
-/* Tab Display Switch */
-.tab-content {
-    display: none;
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
 }
-.tab-content.active {
+.form-group label {
     display: block;
-}
-
-/* --- HOME TAB DESKTOP LOOK --- */
-.hero-banner {
-    position: relative;
-    width: 100%;
-    height: 85vh; /* Large screen balanced height */
-    overflow: hidden;
-}
-.hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.hero-overlay {
-    position: absolute;
-    bottom: 12%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #ffffff;
-}
-.hero-overlay h2 {
-    font-size: 32px;
-    font-weight: 300;
-    margin-bottom: 20px;
-    letter-spacing: 3px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
-.btn-explore {
-    background: #ffffff;
-    color: #000000;
-    border: 1px solid #000000;
-    padding: 14px 45px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    cursor: pointer;
+    font-size: 11px;
     font-weight: 500;
-    transition: all 0.3s;
-}
-.btn-explore:hover {
-    background: #000000;
-    color: #ffffff;
-}
-.brand-details {
-    padding: 80px 20px;
-    text-align: center;
-    max-width: 750px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
     color: #333;
-    font-weight: 300;
 }
-
-/* --- SHOP TAB (Premium Desktop 4-Column Layout) --- */
-.shop-container {
-    padding: 60px 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-.page-title {
-    text-align: center;
-    font-size: 24px;
-    letter-spacing: 3px;
-    margin-bottom: 50px;
-    font-weight: 300;
-}
-.shop-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 Columns on Laptop/PC screens */
-    gap: 35px 25px;
-}
-.shop-card {
-    display: flex;
-    flex-direction: column;
-}
-.img-wrapper {
+.form-group input, .form-group textarea {
     width: 100%;
-    height: 420px; /* Elegant Medium-Large boutique catalog height */
-    overflow: hidden;
-    background: #fcfcfc;
-}
-.img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-.shop-card:hover .img-wrapper img {
-    transform: scale(1.03); /* Soft elegant zoom on hover */
-}
-.shop-card h3 {
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    margin: 15px 0 6px 0;
-    color: #111;
-}
-.price {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
     color: #000;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
 }
-.btn-buy {
-    background: #000000;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #000;
+}
+.btn-submit-order {
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    padding: 14px 0;
+    border: none;
     font-size: 12px;
-    padding: 12px 0;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
     transition: background-color 0.2s;
 }
-.btn-buy:hover {
-    background-color: #222222;
+.btn-submit-order:hover {
+    background-color: #222;
 }
 
-/* Premium Minimalist Footer */
-.trust-footer {
-    text-align: center;
-    padding: 40px 20px;
-    background: #fafafa;
-    border-top: 1px solid #f2f2f2;
-    font-size: 12px;
-    color: #555;
-    letter-spacing: 1px;
-    margin-top: 80px;
-}
-
-/* Adaptive Layout for Smaller Screens / Mobile Devices */
-@media (max-width: 900px) {
-    .shop-grid {
-        grid-template-columns: repeat(2, 1fr); /* Switches cleanly to 2 columns on phones */
-        gap: 20px 15px;
-    }
-    .img-wrapper {
-        height: 280px; /* Sizes down nicely for mobile displays */
-    }
-    .shop-container {
-        padding: 30px 15px;
-    }
-    .logo {
-        font-size: 22px;
-    }
-    .nav-tabs {
-        gap: 25px;
-    }
-}
