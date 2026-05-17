@@ -213,6 +213,90 @@ body {
     background-color: #222222;
 }
 
+/* ================= CUSTOMER CARE SECTION STYLING ================= */
+.customer-care-section {
+    background-color: #fafafa;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+    padding: 60px 40px;
+}
+.care-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+.care-info {
+    flex: 1;
+}
+.care-title {
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #000000;
+}
+.care-subtitle {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+.care-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.care-item {
+    font-size: 14px;
+    line-height: 1.6;
+}
+.care-item strong {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #111111;
+    margin-bottom: 2px;
+}
+.care-item span {
+    color: #444444;
+    font-weight: 300;
+}
+.care-qr-box {
+    text-align: center;
+    background: #ffffff;
+    padding: 25px;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.care-qr-box h4 {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.qr-image-wrapper {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 12px auto;
+}
+.qr-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.qr-handle {
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #000000;
+}
+
 /* ================= VERIFIED SUCCESS RECEIPT MODAL INTERFACE ================= */
 .modal {
     display: none; 
@@ -229,7 +313,7 @@ body {
 .modal-content {
     background-color: #ffffff;
     padding: 40px;
-    border-radius: 0px; /* Sharp, clean minimalist edges */
+    border-radius: 0px; 
     max-width: 460px;
     width: 92%;
     text-align: center;
@@ -248,8 +332,6 @@ body {
 .close-btn:hover {
     color: #000000;
 }
-
-/* Receipt Typography and Styling Components */
 .receipt-success-icon {
     width: 48px;
     height: 48px;
@@ -337,11 +419,9 @@ body {
     text-align: center;
     padding: 40px 20px;
     background: #ffffff;
-    border-top: 1px solid #f8f8f8;
     font-size: 11px;
     color: #666666;
     letter-spacing: 1px;
-    margin-top: 80px;
 }
 
 /* ================= RESPONSIVE SMARTPHONE ADAPTATIONS ================= */
@@ -370,6 +450,14 @@ body {
     }
     .hero-banner {
         height: 70vh;
+    }
+    .care-container {
+        flex-direction: column;
+        gap: 35px;
+        text-align: center;
+    }
+    .customer-care-section {
+        padding: 40px 15px;
     }
 }
 
