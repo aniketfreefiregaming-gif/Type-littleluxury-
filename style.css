@@ -1,4 +1,4 @@
-/* Premium Reset */
+/* ================= PREMIUM BRAND RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -8,9 +8,10 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #ffffff;
     color: #000000;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Minimalist Top Bar */
+/* Minimalist Top Announcement Bar */
 .announcement-bar {
     background-color: #000000;
     color: #ffffff;
@@ -21,7 +22,7 @@ body {
     font-weight: 400;
 }
 
-/* RESTORED: Premium Luxury Sticky Navigation Bar */
+/* ================= LUXURY NAVIGATION STICKY HEADER ================= */
 .main-header {
     display: flex;
     flex-direction: column;
@@ -60,7 +61,8 @@ body {
 .tab-link:hover {
     color: #000000;
 }
-/* Premium Underline Animation Look */
+
+/* Luxury Tab Active Underline Line Animation Look */
 .tab-link::after {
     content: '';
     position: absolute;
@@ -80,7 +82,7 @@ body {
     transform: scaleX(1);
 }
 
-/* Core Interface Display Engines */
+/* Display Control Configuration */
 .tab-content {
     display: none;
 }
@@ -88,7 +90,7 @@ body {
     display: block;
 }
 
-/* --- HOME VIEW CODES --- */
+/* ================= HOME TAB LAYOUT ================= */
 .hero-banner {
     position: relative;
     width: 100%;
@@ -143,7 +145,7 @@ body {
     font-weight: 300;
 }
 
-/* --- SHOP VIEW CATALOGUE CODES --- */
+/* ================= BOUTIQUE SHOP CATALOGUE GRID ================= */
 .shop-container {
     padding: 60px 40px;
     max-width: 1400px;
@@ -211,7 +213,7 @@ body {
     background-color: #222222;
 }
 
-/* ================= MODERN MODAL COMPONENT WINDOW STYLES ================= */
+/* ================= VERIFIED SUCCESS RECEIPT MODAL INTERFACE ================= */
 .modal {
     display: none; 
     position: fixed;
@@ -220,14 +222,14 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     align-items: center;
     justify-content: center;
 }
 .modal-content {
     background-color: #ffffff;
     padding: 40px;
-    border-radius: 0px; /* Minimalist clean edge look */
+    border-radius: 0px; /* Sharp, clean minimalist edges */
     max-width: 460px;
     width: 92%;
     text-align: center;
@@ -246,67 +248,11 @@ body {
 .close-btn:hover {
     color: #000000;
 }
-.modal-content h3 {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-}
-.modal-amount {
-    font-size: 15px;
-    margin-bottom: 25px;
-    color: #555555;
-}
-.modal-amount span {
-    font-weight: 600;
-    color: #000000;
-}
 
-/* Form Styles */
-.form-group {
-    text-align: left;
-    margin-bottom: 16px;
-}
-.form-group label {
-    display: block;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-    color: #222222;
-}
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #dddddd;
-    font-family: inherit;
-    font-size: 13px;
-    color: #000000;
-    background: #ffffff;
-    outline: none;
-}
-.form-group input:focus, .form-group textarea:focus {
-    border-color: #000000;
-}
-.btn-submit-order, .btn-confirm-payment {
-    background-color: #000000;
-    color: #ffffff;
-    width: 100%;
-    padding: 14px 0;
-    border: none;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-/* Receipt Styles */
+/* Receipt Typography and Styling Components */
 .receipt-success-icon {
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
     background: #eafaf1;
     color: #25d366;
     border-radius: 50%;
@@ -320,6 +266,8 @@ body {
     font-size: 18px;
     font-weight: 500;
     color: #111111;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
 }
 .receipt-sub {
     font-size: 12px;
@@ -352,6 +300,7 @@ body {
     padding: 2px 8px;
     font-size: 11px;
     font-weight: 500;
+    border-radius: 2px;
 }
 .confirmation-action-box p {
     font-size: 12px;
@@ -364,46 +313,16 @@ body {
     background-color: #25d366;
     color: #ffffff;
     text-align: center;
-    padding: 13px 0;
+    padding: 14px 0;
     text-decoration: none;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    transition: background-color 0.2s;
 }
-
-.qr-container p {
-    font-size: 12px;
-    color: #555555;
-    line-height: 1.5;
-    margin-bottom: 15px;
-}
-.qr-wrapper {
-    background: #ffffff;
-    padding: 12px;
-    display: inline-block;
-    border: 1px solid #eeeeee;
-    margin-bottom: 15px;
-}
-.qr-wrapper img {
-    display: block;
-}
-.upi-id-display {
-    font-size: 12px;
-    color: #333333;
-    margin-bottom: 10px;
-}
-.btn-mobile-pay {
-    display: none;
-    background: #000000;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 14px 0;
-    width: 100%;
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    font-weight: 500;
-    text-transform: uppercase;
+.btn-whatsapp-send:hover {
+    background-color: #20ba56;
 }
 .modal-footer-note {
     font-size: 11px;
@@ -413,7 +332,7 @@ body {
     padding-top: 15px;
 }
 
-/* Premium Minimalist Footer */
+/* ================= LUXURY TRUST FOOTER ================= */
 .trust-footer {
     text-align: center;
     padding: 40px 20px;
@@ -425,7 +344,7 @@ body {
     margin-top: 80px;
 }
 
-/* ================= RESPONSIVE MOBILE OVERRIDES ================= */
+/* ================= RESPONSIVE SMARTPHONE ADAPTATIONS ================= */
 @media (max-width: 900px) {
     .shop-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -452,10 +371,5 @@ body {
     .hero-banner {
         height: 70vh;
     }
-    .qr-container {
-        display: none;
-    }
-    .btn-mobile-pay {
-        display: block;
-    }
 }
+
