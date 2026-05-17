@@ -1,53 +1,461 @@
-/* Premium Form Interface Look Extensions */
-#form-step-view h3 {
+/* Premium Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Minimalist Top Bar */
+.announcement-bar {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+/* RESTORED: Premium Luxury Sticky Navigation Bar */
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 0 0 0;
+    border-bottom: 1px solid #f8f8f8;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.logo {
+    font-size: 26px;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    color: #000000;
+}
+.nav-tabs {
+    display: flex;
+    gap: 50px;
+}
+.tab-link {
+    background: none;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #888888;
+    padding-bottom: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+}
+.tab-link:hover {
+    color: #000000;
+}
+/* Premium Underline Animation Look */
+.tab-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: #000000;
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tab-link.active {
+    color: #000000;
+    font-weight: 500;
+}
+.tab-link.active::after {
+    transform: scaleX(1);
+}
+
+/* Core Interface Display Engines */
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+/* --- HOME VIEW CODES --- */
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: 85vh;
+    overflow: hidden;
+}
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-overlay {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #ffffff;
+}
+.hero-overlay h2 {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 25px;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+.btn-explore {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    padding: 14px 45px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.btn-explore:hover {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+.brand-details {
+    padding: 90px 20px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444444;
+    font-weight: 300;
+}
+
+/* --- SHOP VIEW CATALOGUE CODES --- */
+.shop-container {
+    padding: 60px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.page-title {
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 3px;
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 35px 25px;
+}
+.shop-card {
+    display: flex;
+    flex-direction: column;
+}
+.img-wrapper {
+    width: 100%;
+    height: 440px;
+    overflow: hidden;
+    background: #fafafa;
+}
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.shop-card:hover .img-wrapper img {
+    transform: scale(1.04);
+}
+.shop-card h3 {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 18px 0 6px 0;
+    color: #111111;
+}
+.price {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #000000;
+}
+.btn-buy {
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    font-size: 11px;
+    padding: 13px 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+.btn-buy:hover {
+    background-color: #222222;
+}
+
+/* ================= MODERN MODAL COMPONENT WINDOW STYLES ================= */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 0px; /* Minimalist clean edge look */
+    max-width: 460px;
+    width: 92%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 26px;
+    cursor: pointer;
+    color: #bbbbbb;
+    transition: color 0.2s;
+}
+.close-btn:hover {
+    color: #000000;
+}
+.modal-content h3 {
     font-size: 18px;
     font-weight: 500;
-    margin-bottom: 5px;
     letter-spacing: 1px;
+    margin-bottom: 8px;
 }
+.modal-amount {
+    font-size: 15px;
+    margin-bottom: 25px;
+    color: #555555;
+}
+.modal-amount span {
+    font-weight: 600;
+    color: #000000;
+}
+
+/* Form Styles */
 .form-group {
     text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 .form-group label {
     display: block;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 10px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 6px;
-    color: #333;
+    color: #222222;
 }
 .form-group input, .form-group textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 11px;
+    border: 1px solid #dddddd;
     font-family: inherit;
     font-size: 13px;
-    color: #000;
-    background: #fff;
+    color: #000000;
+    background: #ffffff;
     outline: none;
-    transition: border-color 0.2s;
 }
 .form-group input:focus, .form-group textarea:focus {
-    border-color: #000;
+    border-color: #000000;
 }
-.btn-submit-order {
-    background-color: #000;
-    color: #fff;
+.btn-submit-order, .btn-confirm-payment {
+    background-color: #000000;
+    color: #ffffff;
     width: 100%;
     padding: 14px 0;
     border: none;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     font-weight: 500;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.2s;
-}
-.btn-submit-order:hover {
-    background-color: #222;
+    margin-top: 5px;
 }
 
+/* Receipt Styles */
+.receipt-success-icon {
+    width: 46px;
+    height: 46px;
+    background: #eafaf1;
+    color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin: 0 auto 15px auto;
+}
+.receipt-headline {
+    font-size: 18px;
+    font-weight: 500;
+    color: #111111;
+}
+.receipt-sub {
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+.formal-receipt-box {
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed #eaeaea;
+    padding-bottom: 8px;
+}
+.receipt-row:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.status-badge {
+    background: #eafaf1;
+    color: #25d366;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 500;
+}
+.confirmation-action-box p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #333333;
+    margin-bottom: 15px;
+}
+.btn-whatsapp-send {
+    display: block;
+    background-color: #25d366;
+    color: #ffffff;
+    text-align: center;
+    padding: 13px 0;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.qr-container p {
+    font-size: 12px;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+.qr-wrapper {
+    background: #ffffff;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid #eeeeee;
+    margin-bottom: 15px;
+}
+.qr-wrapper img {
+    display: block;
+}
+.upi-id-display {
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 10px;
+}
+.btn-mobile-pay {
+    display: none;
+    background: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 0;
+    width: 100%;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.modal-footer-note {
+    font-size: 11px;
+    color: #999999;
+    margin-top: 20px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 15px;
+}
+
+/* Premium Minimalist Footer */
+.trust-footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: #ffffff;
+    border-top: 1px solid #f8f8f8;
+    font-size: 11px;
+    color: #666666;
+    letter-spacing: 1px;
+    margin-top: 80px;
+}
+
+/* ================= RESPONSIVE MOBILE OVERRIDES ================= */
+@media (max-width: 900px) {
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 12px;
+    }
+    .img-wrapper {
+        height: 270px;
+    }
+    .shop-container {
+        padding: 40px 12px;
+    }
+    .logo {
+        font-size: 20px;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+    }
+    .nav-tabs {
+        gap: 30px;
+    }
+    .tab-link {
+        font-size: 12px;
+        padding-bottom: 8px;
+    }
+    .hero-banner {
+        height: 70vh;
+    }
+    .qr-container {
+        display: none;
+    }
+    .btn-mobile-pay {
+        display: block;
+    }
+}
