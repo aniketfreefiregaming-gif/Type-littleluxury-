@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Luxury | Desktop Premium Boutique</title>
+    <title>Little Luxury | Premium Boutique</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -46,7 +46,7 @@
                     </div>
                     <h3>Bespoke Ghagra Choli</h3>
                     <p class="price">₹900</p>
-                    <a href="upi://pay?pa=9322289023@jio&pn=Little%20Luxury&am=900&cu=INR" class="btn-buy">Buy Product</a>
+                    <button class="btn-buy" onclick="handlePayment('900', 'Bespoke Ghagra Choli')">Buy Product</button>
                 </div>
 
                 <div class="shop-card">
@@ -55,7 +55,7 @@
                     </div>
                     <h3>Luxury Sapphire Co-ord Set</h3>
                     <p class="price">₹1,000</p>
-                    <a href="upi://pay?pa=9322289023@jio&pn=Little%20Luxury&am=1000&cu=INR" class="btn-buy">Buy Product</a>
+                    <button class="btn-buy" onclick="handlePayment('1000', 'Sapphire Co-ord Set')">Buy Product</button>
                 </div>
 
                 <div class="shop-card">
@@ -64,7 +64,7 @@
                     </div>
                     <h3>Textured Linen Shirt</h3>
                     <p class="price">₹1,200</p>
-                    <a href="upi://pay?pa=9322289023@jio&pn=Little%20Luxury&am=1200&cu=INR" class="btn-buy">Buy Product</a>
+                    <button class="btn-buy" onclick="handlePayment('1200', 'Textured Linen Shirt')">Buy Product</button>
                 </div>
 
                 <div class="shop-card">
@@ -73,10 +73,84 @@
                     </div>
                     <h3>Signature Designer Gown</h3>
                     <p class="price">₹1,500</p>
-                    <a href="upi://pay?pa=9322289023@jio&pn=Little%20Luxury&am=1500&cu=INR" class="btn-buy">Buy Product</a>
+                    <button class="btn-buy" onclick="handlePayment('1500', 'Signature Designer Gown')">Buy Product</button>
                 </div>
             </div>
         </main>
+    </div>
+
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div id="payment-step-view">
+                <h3 id="modal-product-title">Complete Your Purchase</h3>
+                <p class="modal-amount">Amount to Pay: <span id="modal-price-display">₹0</span></p>
+                
+                <a id="mobile-upi-link" href="#" class="btn-mobile-pay" onclick="showFormStep()">OPEN PAYMENT APP</a>
+                
+                <div id="desktop-qr-container" class="qr-container">
+                    <p>Scan this dynamic QR using any UPI app (GPay, PhonePe, Paytm):</p>
+                    <div class="qr-wrapper">
+                        <img id="dynamic-qr-img" src="" alt="UPI Payment QR Code">
+                    </div>
+                    <p class="upi-id-display">Paying to: <strong>9322289023@jio</strong></p>
+                    <button class="btn-confirm-payment" onclick="showFormStep()">I HAVE PAID — ENTER DELIVERY INFO</button>
+                </div>
+            </div>
+
+            <div id="form-step-view" style="display: none;">
+                <h3>Delivery & Order Confirmation</h3>
+                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Please fill in your details to auto-generate your verified store receipt and notify the designer.</p>
+                
+                <form action="https://formspree.io/f/xnqeazbg" method="POST" id="order-form" onsubmit="submitOrderForm(event)">
+                    
+                    <input type="hidden" name="Order ID" id="hidden-order-id">
+                    <input type="hidden" name="Product Name" id="hidden-product-name">
+                    <input type="hidden" name="Price Paid" id="hidden-price-paid">
+                    <input type="hidden" name="Payment Status" value="Success (UPI)">
+
+                    <div class="form-group">
+                        <label>Your Full Name</label>
+                        <input type="text" name="Customer Name" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Mobile Number</label>
+                        <input type="tel" name="Customer Phone" required placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                        <label>Full Delivery Address</label>
+                        <textarea name="Shipping Address" rows="3" required placeholder="Enter full address with pincode"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-order">GENERATE & SEND RECEIPT</button>
+                </form>
+            </div>
+
+            <div id="receipt-step-view" style="display: none;">
+                <div class="receipt-success-icon">✔</div>
+                <h3 class="receipt-headline">Order Logged Successfully!</h3>
+                <p class="receipt-sub">A receipt copy has been sent to the studio inbox.</p>
+                
+                <div class="formal-receipt-box">
+                    <div class="receipt-row"><strong>Boutique:</strong> <span>Little Luxury</span></div>
+                    <div class="receipt-row"><strong>Order ID:</strong> <span id="receipt-id" style="color: #ca9f43; font-weight: 600;">--</span></div>
+                    <div class="receipt-row"><strong>Customer:</strong> <span id="receipt-customer">--</span></div>
+                    <div class="receipt-row"><strong>Product:</strong> <span id="receipt-product">--</span></div>
+                    <div class="receipt-row"><strong>Total Paid:</strong> <span id="receipt-price">--</span></div>
+                    <div class="receipt-row"><strong>Status:</strong> <span class="status-badge">Payment Received</span></div>
+                </div>
+
+                <div class="confirmation-action-box">
+                    <p><strong>FINAL STEP:</strong> Click the green button below to send your payment screenshot directly to our studio thread on WhatsApp to clear sizing specifications.</p>
+                    <a id="whatsapp-confirm-btn" href="#" target="_blank" class="btn-whatsapp-send">
+                        💬 CHAT WITH DESIGNER ON WHATSAPP
+                    </a>
+                </div>
+            </div>
+            
+            <p class="modal-footer-note">Secure system powered by Little Luxury Studio.</p>
+        </div>
     </div>
 
     <footer class="trust-footer">
@@ -84,6 +158,12 @@
     </footer>
 
     <script>
+        const upiID = "9322289023@jio";
+        const merchantName = "Little Luxury";
+        let currentAmount = "0";
+        let currentProduct = "";
+        let generatedOrderID = "";
+
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
@@ -103,6 +183,94 @@
             const shopBtn = document.querySelector('button[onclick*="shop-screen"]');
             if(shopBtn) shopBtn.click();
         }
+
+        function handlePayment(amount, productName) {
+            currentAmount = amount;
+            currentProduct = productName;
+            
+            // Reset Views
+            document.getElementById('payment-step-view').style.display = "block";
+            document.getElementById('form-step-view').style.display = "none";
+            document.getElementById('receipt-step-view').style.display = "none";
+
+            // Generate Order ID string
+            generatedOrderID = "LL-" + Math.floor(100000 + Math.random() * 900000);
+            
+            const note = encodeURIComponent("Order " + generatedOrderID + " for " + productName);
+            const rawUpiUrl = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${note}`;
+            
+            document.getElementById('modal-product-title').innerText = productName;
+            document.getElementById('modal-price-display').innerText = "₹" + amount;
+            document.getElementById('mobile-upi-link').href = rawUpiUrl;
+            
+            const encodedUpiUrl = encodeURIComponent(rawUpiUrl);
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodedUpiUrl}`;
+            document.getElementById('dynamic-qr-img').src = qrApiUrl;
+            
+            document.getElementById('payment-modal').style.display = "flex";
+        }
+
+        function showFormStep() {
+            document.getElementById('payment-step-view').style.display = "none";
+            document.getElementById('form-step-view').style.display = "block";
+
+            // Inject tracking elements into hidden inputs for Formspree to capture
+            document.getElementById('hidden-order-id').value = generatedOrderID;
+            document.getElementById('hidden-product-name').value = currentProduct;
+            document.getElementById('hidden-price-paid').value = "₹" + currentAmount;
+        }
+
+        function submitOrderForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('order-form');
+            const formData = new FormData(form);
+            const customerName = formData.get('Customer Name');
+            const customerPhone = formData.get('Customer Phone');
+            const shippingAddress = formData.get('Shipping Address');
+
+            // Send full order array asynchronously behind the scenes to Formspree email server
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                // Move display to Final Confirmation Receipt screen
+                document.getElementById('form-step-view').style.display = "none";
+                document.getElementById('receipt-step-view').style.display = "block";
+                
+                document.getElementById('receipt-id').innerText = generatedOrderID;
+                document.getElementById('receipt-customer').innerText = customerName;
+                document.getElementById('receipt-product').innerText = currentProduct;
+                document.getElementById('receipt-price').innerText = "₹" + currentAmount;
+
+                // Configure backup direct text verification for WhatsApp
+                const whatsappText = encodeURIComponent(
+                    `✨ *LITTLE LUXURY CONFIRMED ORDER* ✨\n\n` +
+                    `🆔 *Order ID:* ${generatedOrderID}\n` +
+                    `👤 *Customer Name:* ${customerName}\n` +
+                    `📞 *Phone:* ${customerPhone}\n` +
+                    `👗 *Product Name:* ${currentProduct}\n` +
+                    `💰 *Total Paid:* ₹${currentAmount}\n` +
+                    `📍 *Shipping Address:* ${shippingAddress}\n\n` +
+                    `Je is my attached payment screenshot below:`
+                );
+                document.getElementById('whatsapp-confirm-btn').href = `https://wa.me/919322289023?text=${whatsappText}`;
+            }).catch(error => {
+                alert("Form submission error. Please check your internet connection.");
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('payment-modal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('payment-modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
+
