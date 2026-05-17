@@ -3,51 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Luxury | Premium Boutique</title>
+    <title>Little Luxury | Premium Bespoke Boutique</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="announcement-bar">
-        <p>ELEVATED ESSENTIALS & FLATTERING SILHOUETTES</p>
+        <p>ELEVATED ESSENTIALS & FLATTERING SILHOUETTES — PREMIUM LADIES TAILORING</p>
     </div>
 
     <header class="main-header">
         <div class="logo">LITTLE LUXURY</div>
         <nav class="nav-links">
-            <a href="#">New Arrivals</a>
-            <a href="#">Collections</a>
-            <a href="#contact">Contact Us</a>
+            <a href="#collection">Our Collections</a>
+            <a href="#booking">Custom Booking</a>
+            <a href="https://wa.me/91XXXXXXXXXX" target="_blank">Contact Studio</a>
         </nav>
     </header>
 
     <section class="hero-banner">
-        <div class="hero-overlay">
-            <div class="hero-text">
-                <a href="https://wa.me/91XXXXXXXXXX" class="btn-shop">CHAT ON WHATSAPP</a>
-            </div>
+        <img src="1000003493.jpg" alt="Little Luxury Tailoring Artistry" class="hero-image">
+        <div class="hero-text-overlay">
+            <a href="#booking" class="btn-shop">BOOK CUSTOM STITCHING</a>
         </div>
     </section>
 
-    <main class="collection-section">
-        <h2 class="section-title">Our Premium Collection</h2>
+    <section class="brand-vision">
+        <p>Built on intention, not mass production. Every piece is thoughtfully crafted with a signature sense of luxury, made to fit beautifully and celebrate your unique style.</p>
+    </section>
+
+    <main class="collection-section" id="collection">
+        <h2 class="section-title">The Bridal & Festive Collection</h2>
         <div class="product-grid">
+            
             <div class="product-card">
-                <div class="placeholder-img">Bespoke Outfits</div>
-                <h3>Custom Tailoring</h3>
+                <img src="1000003489.jpg" alt="Premium Ghagra Choli Design">
+                <h3>Bespoke Ghagra Choli</h3>
+                <p class="product-desc">Handcrafted elegance customized with premium heritage fabrics and meticulous embroidery.</p>
             </div>
+
             <div class="product-card">
-                <div class="placeholder-img">Designer Wear</div>
-                <h3>Elegant Co-ords</h3>
+                <img src="1000003487.jpg" alt="Sapphire Co-ord Set">
+                <h3>Luxury Sapphire Co-ord Set</h3>
+                <p class="product-desc">Tailored from raw linen, blending contemporary silhouettes with comfort.</p>
             </div>
+
+            <div class="product-card">
+                <img src="1000003491.jpg" alt="Textured Linen Craftsmanship">
+                <h3>Signature Festive Gowns</h3>
+                <p class="product-desc">Flawlessly contoured evening and ceremonial gowns sculpted for your special occasions.</p>
+            </div>
+
         </div>
     </main>
 
-    <footer class="trust-badges" id="contact">
-        <div class="badge-item">✨ Custom Handcrafted</div>
+    <section class="booking-section" id="booking">
+        <div class="booking-container">
+            <h2>Secure Your Custom Fitting</h2>
+            <p>We work on an exclusive, appointment-only boutique structure. Pay a secure token deposit of ₹500 to book your styling slot or place your initial order order via UPI.</p>
+            
+            <a href="upi://pay?pa=yourvpa@upi&pn=Little%20Luxury&am=500&cu=INR" class="btn-pay">
+                💳 PAY DEPOSIT VIA UPI (G-PAY / PHONEPE)
+            </a>
+            
+            <p class="payment-note">⚠️ Note: Tapping the button above will securely launch your preferred payment app on mobile devices.</p>
+        </div>
+    </section>
+
+    <footer class="trust-badges">
+        <div class="badge-item">✨ Custom Handcrafted Designs</div>
         <div class="badge-item">📐 Perfect Fit Guarantee</div>
-        <div class="badge-item">🧵 Premium Quality</div>
+        <div class="badge-item">🧵 Premium Quality Fabrics Only</div>
     </footer>
 
 </body>
