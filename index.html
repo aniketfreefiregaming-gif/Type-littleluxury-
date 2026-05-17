@@ -81,6 +81,38 @@
         </main>
     </div>
 
+    <section class="customer-care-section">
+        <div class="care-container">
+            <div class="care-info">
+                <h3 class="care-title">Customer Care</h3>
+                <p class="care-subtitle">Have questions regarding sizing, custom alterations, or orders? Reach out to our design studio.</p>
+                
+                <div class="care-details">
+                    <div class="care-item">
+                        <strong>Contact Numbers:</strong>
+                        <span>+91 9359337552 / +91 9322289023</span>
+                    </div>
+                    <div class="care-item">
+                        <strong>Email Address:</strong>
+                        <span>precision.tech.lab56@gmail.com</span>
+                    </div>
+                    <div class="care-item">
+                        <strong>Studio Address:</strong>
+                        <span>Shukrawar Peth, Bawanbole, Yashwant Yadav Building, Pune, Maharashtra 411060</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="care-qr-box">
+                <h4>Connect On Instagram</h4>
+                <div class="qr-image-wrapper">
+                    <img src="1000003510.png" alt="Instagram @litt.leluxy QR Code">
+                </div>
+                <p class="qr-handle">@LITT.LELUXY</p>
+            </div>
+        </div>
+    </section>
+
     <div id="payment-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -146,9 +178,7 @@
             if(shopBtn) shopBtn.click();
         }
 
-        // Upgraded Bank-Level Checkout Handler
         function handlePayment(amount, productName) {
-            // Razorpay operates in paise (₹100 = 10000 paise)
             const secureAmountPaise = parseInt(amount) * 100;
 
             var options = {
@@ -159,20 +189,14 @@
                 "description": "Order for " + productName,
                 "image": "1000003493.jpg",
                 "handler": function (response) {
-                    // THIS ENGINE ONLY RUNS IF PAYMENT IS 100% CAPTURED BY THE BANK
-                    
-                    // 1. Instantly write the data into the receipt display slots
                     document.getElementById('receipt-id').innerText = response.razorpay_payment_id;
                     document.getElementById('receipt-product').innerText = productName;
                     document.getElementById('receipt-price').innerText = "₹" + amount;
 
-                    // 2. Open up the Modal Window explicitly to show the customer their receipt
                     document.getElementById('payment-modal').style.display = "flex";
 
-                    // 3. Silently route the order data to precision.tech.lab56@gmail.com
                     executeEmailLog(response.razorpay_payment_id, productName, amount);
 
-                    // 4. Set up the WhatsApp confirmation message string
                     const whatsappText = encodeURIComponent(
                         `✨ *LITTLE LUXURY VERIFIED RECEIPT* ✨\n\n` +
                         `🆔 *Payment Reference ID:* ${response.razorpay_payment_id}\n` +
@@ -189,13 +213,12 @@
             };
 
             var rzp1 = new Razorpay(options);
-            rzp1.open(); // Launches the secure payment modal popup frame over the site
+            rzp1.open();
         }
 
-        // Asynchronous Background Email Automation
         function executeEmailLog(transactionId, item, price) {
             const dynamicForm = document.createElement('form');
-            dynamicForm.action = "https://formspree.io/f/xnqeazbg"; // Secure mail router server
+            dynamicForm.action = "https://formspree.io/f/xnqeazbg"; 
             dynamicForm.method = "POST";
 
             const payload = {
@@ -241,4 +264,3 @@
     </script>
 </body>
 </html>
-
