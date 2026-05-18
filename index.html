@@ -5,174 +5,437 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Little Luxury</title>
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            color: #333;
-            background-color: #fff;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333333;
         }
-        .checkout-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 10px;
+        
+        /* Two-Column Screen Layout */
+        .page-wrapper {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column-reverse;
         }
+
+        /* Left Side Form Styling */
+        .main-content {
+            flex: 1.3;
+            padding: 40px 60px;
+            background: #ffffff;
+        }
+        .form-container {
+            max-width: 550px;
+            margin-left: auto;
+        }
+
+        /* Right Side Sidebar Styling */
+        .sidebar {
+            flex: 1;
+            background-color: #fafafa;
+            border-left: 1px solid #e1e1e1;
+            padding: 40px 60px;
+        }
+        .sidebar-container {
+            max-width: 400px;
+            margin-right: auto;
+        }
+
+        /* Brand Identity */
         .brand-header {
-            text-align: center;
-            font-size: 26px;
+            font-size: 22px;
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 30px;
             font-weight: 400;
-            border-bottom: 1px solid #e1e1e1;
-            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            color: #000;
         }
+
+        /* Headings & Links */
         .section-title {
-            font-size: 18px;
-            margin: 25px 0 15px 0;
+            font-size: 17px;
             font-weight: 500;
+            margin: 25px 0 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .login-link {
+            font-size: 12px;
+            color: #555;
+            text-decoration: underline;
+        }
+
+        /* Minimal Input Boxes */
         .input-group {
             margin-bottom: 12px;
         }
         input[type="text"], input[type="email"], input[type="tel"], select {
             width: 100%;
-            padding: 13px;
+            padding: 12px 14px;
             border: 1px solid #d9d9d9;
             border-radius: 5px;
-            box-sizing: border-box;
             font-size: 14px;
-            transition: border-color 0.3s;
+            background-color: #fff;
+            transition: border-color 0.2s;
         }
         input:focus, select:focus {
-            border-color: #000;
+            border-color: #000000;
             outline: none;
+            box-shadow: 0 0 0 1px #000000;
         }
         .row {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         .row .input-group {
             flex: 1;
         }
+
+        /* Checkbox styling */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 13px;
+            color: #444;
+        }
+        .checkbox-group input {
+            margin-right: 8px;
+            accent-color: #000;
+        }
+
+        /* Placeholders */
+        .shipping-placeholder {
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            border: 1px solid #e6e6e6;
+        }
+
+        /* Shopify/Pallavi Agarwal Style Payment Box */
         .payment-box {
             border: 1px solid #d9d9d9;
             border-radius: 5px;
-            padding: 15px;
+            overflow: hidden;
             margin-top: 15px;
-            background-color: #fcfcfc;
         }
-        .payment-option {
+        .payment-header {
+            background-color: #fcfcfc;
+            padding: 16px;
             display: flex;
             align-items: center;
-            font-weight: 500;
+            justify-content: space-between;
+            border-bottom: 1px solid #d9d9d9;
+        }
+        .payment-left {
+            display: flex;
+            align-items: center;
             font-size: 14px;
+            font-weight: 500;
         }
-        .payment-option input {
-            margin-right: 10px;
+        .payment-left input {
+            margin-right: 12px;
+            accent-color: #000;
         }
-        .payment-desc {
-            font-size: 12px;
-            color: #666;
-            margin-top: 8px;
-            padding-left: 24px;
+        .payment-icons {
+            font-size: 11px;
+            color: #777;
+            letter-spacing: 1px;
         }
-        .order-summary {
-            background: #fafafa;
-            padding: 15px;
-            border-radius: 5px;
+        .payment-body {
+            background-color: #f5f5f5;
+            padding: 16px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            text-align: center;
+            border-bottom: 1px solid #d9d9d9;
+        }
+        .cod-option {
+            padding: 16px;
+            background-color: #fff;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        .cod-option input {
+            margin-right: 12px;
+            accent-color: #000;
+        }
+
+        /* Sidebar Product Display */
+        .product-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        .product-info {
+            display: flex;
+            align-items: center;
+        }
+        .product-image-wrapper {
+            position: relative;
+            width: 64px;
+            height: 64px;
+            background: #fff;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+        }
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .product-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: rgba(114, 114, 114, 0.9);
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+        .product-price {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Price Math Layout */
+        .price-breakdown {
+            font-size: 14px;
+            color: #555;
+        }
+        .price-line {
             display: flex;
             justify-content: space-between;
-            font-weight: bold;
-            border: 1px solid #e1e1e1;
+            margin-bottom: 10px;
         }
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e1e1;
+        }
+        .currency-code {
+            font-size: 12px;
+            color: #777;
+            font-weight: 400;
+            margin-right: 5px;
+        }
+
+        /* Premium Black Button */
         .btn-pay {
             width: 100%;
-            background-color: #000;
-            color: #fff;
+            background-color: #000000;
+            color: #ffffff;
             border: none;
-            padding: 16px;
-            font-size: 16px;
+            padding: 18px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 25px;
-            letter-spacing: 1px;
-            transition: background 0.3s;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .btn-pay:hover {
-            background-color: #222;
+            background-color: #222222;
+        }
+
+        /* Responsive Setup */
+        @media (min-width: 768px) {
+            .page-wrapper {
+                flex-direction: row;
+            }
+            .main-content {
+                padding: 60px 80px 60px 40px;
+            }
+            .sidebar {
+                padding: 60px 40px 60px 80px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="checkout-container">
-    <div class="brand-header">LITTLE LUXURY</div>
+<div class="page-wrapper">
+    
+    <div class="main-content">
+        <div class="form-container">
+            <a href="#" class="brand-header">LITTLE LUXURY</a>
 
-    <div class="order-summary">
-        <span>Total (1 Item)</span>
-        <span>₹16,500.00</span>
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                
+                <input type="hidden" name="_subject" value="New Boutique Order Received!">
+                <input type="hidden" id="form-item-name" name="Ordered_Item" value="">
+                <input type="hidden" id="form-item-price" name="Order_Total" value="">
+                <input type="hidden" name="_next" value="https://pages.razorpay.com/your_custom_payment_link">
+
+                <div class="section-title">
+                    <span>Contact</span>
+                    <a href="#" class="login-link">Sign in</a>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="Email" placeholder="Email" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="Subscribe_News" id="news" checked>
+                    <label Truman for="news">Email me with news and offers</label>
+                </div>
+
+                <div class="section-title">Delivery</div>
+                <div class="input-group">
+                    <select name="Country">
+                        <option value="India">India</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="input-group"><input type="text" name="First_Name" placeholder="First name" required></div>
+                    <div class="input-group"><input type="text" name="Last_Name" placeholder="Last name" required></div>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="Address" placeholder="Address" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="Apartment" placeholder="Apartment, suite, etc. (optional)">
+                </div>
+                <div class="row">
+                    <div class="input-group"><input type="text" name="City" placeholder="City" required></div>
+                    <div class="input-group">
+                        <select name="State">
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Gujarat">Gujarat</option>
+                        </select>
+                    </div>
+                    <div class="input-group"><input type="text" name="Pincode" placeholder="PIN code" required></div>
+                </div>
+                <div class="input-group">
+                    <input type="tel" name="Phone" placeholder="Phone" required>
+                </div>
+
+                <div class="section-title">Shipping method</div>
+                <div class="shipping-placeholder">
+                    Enter your shipping address to view available shipping methods.
+                </div>
+
+                <div class="section-title">Payment</div>
+                <p style="font-size: 12px; color: #666; margin-top:-5px; margin-bottom:12px;">All transactions are secure and encrypted.</p>
+                
+                <div class="payment-box">
+                    <div class="payment-header">
+                        <div class="payment-left">
+                            <input type="radio" name="Payment_Type" value="Online Gateway" checked>
+                            <span>Razorpay Secure (UPI, Cards, Int'l Cards, Wallets)</span>
+                        </div>
+                        <div class="payment-icons">UPI VISA MC +18</div>
+                    </div>
+                    <div class="payment-body">
+                        You'll be redirected to Razorpay Secure (UPI, Cards, Int'l Cards, Wallets) to complete your purchase safely.
+                    </div>
+                    <div class="cod-option">
+                        <input type="radio" name="Payment_Type" value="COD">
+                        <span>Cash on Delivery (COD)</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-pay">Pay now</button>
+            </form>
+        </div>
     </div>
 
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        
-        <input type="hidden" name="_subject" value="New Order Placed - Little Luxury!">
-        <input type="hidden" name="Ordered_Item" value="Premium Clothing Item (Custom)">
-        <input type="hidden" name="Order_Total" value="₹16,500.00">
-        
-        <input type="hidden" name="_next" value="https://pages.razorpay.com/your_custom_payment_link">
-
-        <div class="section-title">Contact</div>
-        <div class="input-group">
-            <input type="email" name="Customer_Email" placeholder="Email" required>
-        </div>
-
-        <div class="section-title">Delivery</div>
-        <div class="input-group">
-            <select name="Country">
-                <option value="India">India</option>
-            </select>
-        </div>
-        
-        <div class="row">
-            <div class="input-group"><input type="text" name="First_Name" placeholder="First name" required></div>
-            <div class="input-group"><input type="text" name="Last_Name" placeholder="Last name" required></div>
-        </div>
-
-        <div class="input-group">
-            <input type="text" name="Address" placeholder="Address" required>
-        </div>
-        <div class="input-group">
-            <input type="text" name="Apartment_Suite" placeholder="Apartment, suite, etc. (optional)">
-        </div>
-
-        <div class="row">
-            <div class="input-group"><input type="text" name="City" placeholder="City" required></div>
-            <div class="input-group"><input type="text" name="State" placeholder="State" value="Maharashtra" required></div>
-            <div class="input-group"><input type="text" name="PIN_code" placeholder="PIN code" required></div>
-        </div>
-
-        <div class="input-group">
-            <input type="tel" name="Phone_Number" placeholder="Phone" required>
-        </div>
-
-        <div class="section-title">Payment</div>
-        <div class="payment-box">
-            <div class="payment-option">
-                <input type="radio" name="Payment_Method" value="Instant UPI / Card" checked> 
-                <strong>Razorpay Secure (UPI, Cards, Wallets)</strong>
+    <div class="sidebar">
+        <div class="sidebar-container">
+            
+            <div class="product-row">
+                <div class="product-info">
+                    <div class="product-image-wrapper">
+                        <img id="display-img" src="https://via.placeholder.com/64" alt="Product Image">
+                        <div class="product-count">1</div>
+                    </div>
+                    <div id="display-name" class="product-name">Loading Product...</div>
+                </div>
+                <div id="display-price-item" class="product-price">₹0.00</div>
             </div>
-            <div class="payment-desc">
-                After clicking "Pay now", your shipping details will be saved, and you will be safely redirected to complete your secure transaction.
-            </div>
-        </div>
 
-        <button type="submit" class="btn-pay">Pay now</button>
-    </form>
+            <div class="price-breakdown">
+                <div class="price-line">
+                    <span>Subtotal</span>
+                    <span id="display-subtotal">₹0.00</span>
+                </div>
+                <div class="price-line">
+                    <span>Shipping</span>
+                    <span style="font-size: 12px; color: #666;">Calculated at next step</span>
+                </div>
+                <div class="total-line">
+                    <span>Total</span>
+                    <span><span class="currency-code">INR</span><span id="display-total">₹0.00</span></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
+
+<script>
+    function loadCheckoutData() {
+        // Look up the URL query parameters
+        const params = new URLSearchParams(window.location.search);
+        
+        // Grab values or fall back to defaults if user goes directly to checkout page
+        const itemName = params.get('name') || "Premium Apparel Selection";
+        const itemPrice = params.get('price') || "1000"; 
+        const itemImg = params.get('image') || "https://via.placeholder.com/64";
+
+        // Convert raw string integer to custom currency format (e.g., 1000 -> ₹1,000.00)
+        const formattedPrice = "₹" + parseFloat(itemPrice).toLocaleString('en-IN', { minimumFractionDigits: 2 });
+
+        // Update UI View items dynamically
+        document.getElementById('display-name').innerText = itemName;
+        document.getElementById('display-price-item').innerText = formattedPrice;
+        document.getElementById('display-subtotal').innerText = formattedPrice;
+        document.getElementById('display-total').innerText = formattedPrice;
+        document.getElementById('display-img').src = itemImg;
+
+        // Force feed the data into hidden backend inputs to guarantee clear email structure
+        document.getElementById('form-item-name').value = itemName;
+        document.getElementById('form-item-price').value = formattedPrice;
+    }
+    
+    // Automatically trigger calculation parsing on system load
+    window.onload = loadCheckoutData;
+</script>
 
 </body>
 </html>
