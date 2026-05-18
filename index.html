@@ -3,265 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Luxury | Premium Boutique</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <title>Checkout - Little Luxury</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .checkout-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .brand-header {
+            text-align: center;
+            font-size: 26px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-weight: 400;
+            border-bottom: 1px solid #e1e1e1;
+            padding-bottom: 20px;
+        }
+        .section-title {
+            font-size: 18px;
+            margin: 25px 0 15px 0;
+            font-weight: 500;
+        }
+        .input-group {
+            margin-bottom: 12px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #000;
+            outline: none;
+        }
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+        .row .input-group {
+            flex: 1;
+        }
+        .payment-box {
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            background-color: #fcfcfc;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .payment-option input {
+            margin-right: 10px;
+        }
+        .payment-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+            padding-left: 24px;
+        }
+        .order-summary {
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            border: 1px solid #e1e1e1;
+        }
+        .btn-pay {
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 25px;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+            text-transform: uppercase;
+        }
+        .btn-pay:hover {
+            background-color: #222;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="announcement-bar">
-        <p>ELEVATED ESSENTIALS — LUXURY LADIES TAILORING STUDIO</p>
+<div class="checkout-container">
+    <div class="brand-header">LITTLE LUXURY</div>
+
+    <div class="order-summary">
+        <span>Total (1 Item)</span>
+        <span>₹16,500.00</span>
     </div>
 
-    <header class="main-header">
-        <div class="logo">LITTLE LUXURY</div>
-        <nav class="nav-tabs">
-            <button class="tab-link active" onclick="openTab(event, 'home-screen')">Home</button>
-            <button class="tab-link" onclick="openTab(event, 'shop-screen')">Shop</button>
-        </nav>
-    </header>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        
+        <input type="hidden" name="_subject" value="New Order Placed - Little Luxury!">
+        <input type="hidden" name="Ordered_Item" value="Premium Clothing Item (Custom)">
+        <input type="hidden" name="Order_Total" value="₹16,500.00">
+        
+        <input type="hidden" name="_next" value="https://pages.razorpay.com/your_custom_payment_link">
 
-    <div id="home-screen" class="tab-content active">
-        <section class="hero-banner">
-            <img src="1000003493.jpg" alt="Bespoke Tailoring Studio" class="hero-image">
-            <div class="hero-overlay">
-                <h2>The Tailor's Artistry</h2>
-                <button class="btn-explore" onclick="goToShopTab()">EXPLORE BOUTIQUE</button>
+        <div class="section-title">Contact</div>
+        <div class="input-group">
+            <input type="email" name="Customer_Email" placeholder="Email" required>
+        </div>
+
+        <div class="section-title">Delivery</div>
+        <div class="input-group">
+            <select name="Country">
+                <option value="India">India</option>
+            </select>
+        </div>
+        
+        <div class="row">
+            <div class="input-group"><input type="text" name="First_Name" placeholder="First name" required></div>
+            <div class="input-group"><input type="text" name="Last_Name" placeholder="Last name" required></div>
+        </div>
+
+        <div class="input-group">
+            <input type="text" name="Address" placeholder="Address" required>
+        </div>
+        <div class="input-group">
+            <input type="text" name="Apartment_Suite" placeholder="Apartment, suite, etc. (optional)">
+        </div>
+
+        <div class="row">
+            <div class="input-group"><input type="text" name="City" placeholder="City" required></div>
+            <div class="input-group"><input type="text" name="State" placeholder="State" value="Maharashtra" required></div>
+            <div class="input-group"><input type="text" name="PIN_code" placeholder="PIN code" required></div>
+        </div>
+
+        <div class="input-group">
+            <input type="tel" name="Phone_Number" placeholder="Phone" required>
+        </div>
+
+        <div class="section-title">Payment</div>
+        <div class="payment-box">
+            <div class="payment-option">
+                <input type="radio" name="Payment_Method" value="Instant UPI / Card" checked> 
+                <strong>Razorpay Secure (UPI, Cards, Wallets)</strong>
             </div>
-        </section>
-
-        <section class="brand-details">
-            <p>Our garments are meticulously drafted, cut, and finished by hand. Visit our Shop tab to purchase our exclusive custom silhouettes directly.</p>
-        </section>
-    </div>
-
-    <div id="shop-screen" class="tab-content">
-        <main class="shop-container">
-            <h2 class="page-title">The Boutique Catalogue</h2>
-            
-            <div class="shop-grid">
-                <div class="shop-card">
-                    <div class="img-wrapper">
-                        <img src="1000003489.jpg" alt="Bespoke Ghagra Choli">
-                    </div>
-                    <h3>Bespoke Ghagra Choli</h3>
-                    <p class="price">₹900</p>
-                    <button class="btn-buy" onclick="handlePayment('900', 'Bespoke Ghagra Choli')">Buy Product</button>
-                </div>
-
-                <div class="shop-card">
-                    <div class="img-wrapper">
-                        <img src="1000003487.jpg" alt="Luxury Sapphire Co-ord Set">
-                    </div>
-                    <h3>Luxury Sapphire Co-ord Set</h3>
-                    <p class="price">₹1,000</p>
-                    <button class="btn-buy" onclick="handlePayment('1000', 'Luxury Sapphire Co-ord Set')">Buy Product</button>
-                </div>
-
-                <div class="shop-card">
-                    <div class="img-wrapper">
-                        <img src="1000003491.jpg" alt="Textured Linen Shirt">
-                    </div>
-                    <h3>Textured Linen Shirt</h3>
-                    <p class="price">₹1,200</p>
-                    <button class="btn-buy" onclick="handlePayment('1200', 'Textured Linen Shirt')">Buy Product</button>
-                </div>
-
-                <div class="shop-card">
-                    <div class="img-wrapper">
-                        <img src="1000003493.jpg" alt="Premium Tailored Outfit">
-                    </div>
-                    <h3>Signature Designer Gown</h3>
-                    <p class="price">₹1,500</p>
-                    <button class="btn-buy" onclick="handlePayment('1500', 'Signature Designer Gown')">Buy Product</button>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <section class="customer-care-section">
-        <div class="care-container">
-            <div class="care-info">
-                <h3 class="care-title">Customer Care</h3>
-                <p class="care-subtitle">Have questions regarding sizing, custom alterations, or orders? Reach out to our design studio.</p>
-                
-                <div class="care-details">
-                    <div class="care-item">
-                        <strong>Contact Numbers:</strong>
-                        <span>+91 9359337552 / +91 9322289023</span>
-                    </div>
-                    <div class="care-item">
-                        <strong>Email Address:</strong>
-                        <span>precision.tech.lab56@gmail.com</span>
-                    </div>
-                    <div class="care-item">
-                        <strong>Studio Address:</strong>
-                        <span>Shukrawar Peth, near Hanuman Mandir, Bawanbole, Yashwant Yadav Building, Pune, Maharashtra 411060</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="care-qr-box">
-                <h4>Connect On Instagram</h4>
-                <div class="qr-image-wrapper">
-                    <img src="instagram.jpg" alt="Instagram @litt.leluxy QR Code">
-                </div>
-                <p class="qr-handle">@LITT.LELUXY</p>
+            <div class="payment-desc">
+                After clicking "Pay now", your shipping details will be saved, and you will be safely redirected to complete your secure transaction.
             </div>
         </div>
-    </section>
 
-    <div id="payment-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            
-            <div id="payment-step-view" style="display:none;">
-                <h3 id="modal-product-title">Processing Secure Terminal</h3>
-                <p class="modal-amount"><span id="modal-price-display">₹0</span></p>
-                <a id="mobile-upi-link" href="#"></a>
-                <img id="dynamic-qr-img" src="" style="display:none;">
-            </div>
+        <button type="submit" class="btn-pay">Pay now</button>
+    </form>
+</div>
 
-            <div id="receipt-step-view">
-                <div class="receipt-success-icon">✔</div>
-                <h3 class="receipt-headline">Order Verified & Confirmed!</h3>
-                <p class="receipt-sub">Your digital receipt has been generated successfully:</p>
-                
-                <div class="formal-receipt-box">
-                    <div class="receipt-row"><strong>Boutique:</strong> <span>Little Luxury</span></div>
-                    <div class="receipt-row"><strong>Payment Ref ID:</strong> <span id="receipt-id" style="color: #ca9f43; font-weight: 600;">--</span></div>
-                    <div class="receipt-row"><strong>Item Ordered:</strong> <span id="receipt-product">--</span></div>
-                    <div class="receipt-row"><strong>Total Paid:</strong> <span id="receipt-price">--</span></div>
-                    <div class="receipt-row"><strong>Status:</strong> <span class="status-badge">Payment Received</span></div>
-                </div>
-
-                <div class="confirmation-action-box">
-                    <p><strong>FINAL STEP:</strong> Click the button below to send your payment details and delivery address to our studio on WhatsApp to confirm sizing details.</p>
-                    <a id="whatsapp-confirm-btn" href="#" target="_blank" class="btn-whatsapp-send">
-                        💬 CHAT WITH DESIGNER ON WHATSAPP
-                    </a>
-                </div>
-            </div>
-            
-            <p class="modal-footer-note">Secure network connection powered by Little Luxury Studio.</p>
-        </div>
-    </div>
-
-    <footer class="trust-footer">
-        <p>✨ Handcrafted Designs | 📐 Perfect Fit Guarantee | 🧵 Premium Quality Fabrics</p>
-    </footer>
-
-    <script>
-        const razorpayKeyId = "YOUR_RAZORPAY_KEY_ID"; // Replace with your live Key ID from Razorpay Dashboard
-        const studioEmail = "precision.tech.lab56@gmail.com";
-        const brandName = "Little Luxury";
-
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
-            tablinks = document.getElementsByClassName("tab-link");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-            window.scrollTo(0, 0);
-        }
-
-        function goToShopTab() {
-            const shopBtn = document.querySelector('button[onclick*="shop-screen"]');
-            if(shopBtn) shopBtn.click();
-        }
-
-        function handlePayment(amount, productName) {
-            const secureAmountPaise = parseInt(amount) * 100;
-
-            var options = {
-                "key": razorpayKeyId,
-                "amount": secureAmountPaise,
-                "currency": "INR",
-                "name": brandName,
-                "description": "Order for " + productName,
-                "image": "1000003493.jpg",
-                "handler": function (response) {
-                    document.getElementById('receipt-id').innerText = response.razorpay_payment_id;
-                    document.getElementById('receipt-product').innerText = productName;
-                    document.getElementById('receipt-price').innerText = "₹" + amount;
-
-                    document.getElementById('payment-modal').style.display = "flex";
-
-                    executeEmailLog(response.razorpay_payment_id, productName, amount);
-
-                    const whatsappText = encodeURIComponent(
-                        `✨ *LITTLE LUXURY VERIFIED RECEIPT* ✨\n\n` +
-                        `🆔 *Payment Reference ID:* ${response.razorpay_payment_id}\n` +
-                        `👗 *Item Name:* ${productName}\n` +
-                        `💰 *Amount Cleared:* ₹${amount}\n` +
-                        `🟢 *Status:* Success (Funds Verified)\n\n` +
-                        `Here is my custom sizing requirements and shipping address:`
-                    );
-                    document.getElementById('whatsapp-confirm-btn').href = `https://wa.me/919322289023?text=${whatsappText}`;
-                },
-                "theme": {
-                    "color": "#000000"
-                }
-            };
-
-            var rzp1 = new Razorpay(options);
-            rzp1.open();
-        }
-
-        function executeEmailLog(transactionId, item, price) {
-            const dynamicForm = document.createElement('form');
-            dynamicForm.action = "https://formspree.io/f/xnqeazbg"; 
-            dynamicForm.method = "POST";
-
-            const payload = {
-                "Alert Target": studioEmail,
-                "Notification Status": "SUCCESSFUL SALE CAPTURED",
-                "Transaction Reference ID": transactionId,
-                "Product Purchased": item,
-                "Total Revenue Handover": "₹" + price,
-                "Security Check": "Verified Payment Gate"
-            };
-
-            for (const key in payload) {
-                const hiddenInput = document.createElement('input');
-                hiddenInput.type = 'hidden';
-                hiddenInput.name = key;
-                hiddenInput.value = payload[key];
-                dynamicForm.appendChild(hiddenInput);
-            }
-
-            document.body.appendChild(dynamicForm);
-
-            fetch(dynamicForm.action, {
-                method: dynamicForm.method,
-                body: new FormData(dynamicForm),
-                headers: { 'Accept': 'application/json' }
-            }).then(() => {
-                dynamicForm.remove();
-            }).catch(() => {
-                dynamicForm.remove();
-            });
-        }
-
-        function closeModal() {
-            document.getElementById('payment-modal').style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('payment-modal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 </body>
 </html>
 
