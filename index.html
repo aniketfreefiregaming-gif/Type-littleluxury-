@@ -1,707 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Luxury - Premium Boutique Store</title>
-    <style>
-        /* --- CORE SYSTEM RESETS & TYPOGRAPHY --- */
-        * {
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-color: #ffffff;
-            color: #333333;
-            overflow-x: hidden;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* --- VIEWS CONTROLLER MANAGER --- */
-        .page-view {
-            display: none;
-        }
-        .active-view {
-            display: block;
-        }
-
-        /* --- HOME VIEW: ANNOUNCEMENT BAR --- */
-        .announcement-bar {
-            background-color: #000000;
-            color: #ffffff;
-            text-align: center;
-            padding: 9px;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 400;
-        }
-
-        /* --- HOME VIEW: NAVIGATION HEADER --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 50px;
-            border-bottom: 1px solid #f0f0f0;
-            background: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        .nav-links a {
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #444444;
-            transition: color 0.2s;
-            font-weight: 400;
-        }
-        .nav-links a:hover {
-            color: #000000;
-        }
-        .brand-logo {
-            font-size: 22px;
-            letter-spacing: 5px;
-            font-weight: 400;
-            color: #000000;
-            text-align: center;
-        }
-        .nav-icons {
-            display: flex;
-            gap: 22px;
-            align-items: center;
-        }
-        .nav-icon-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #222222;
-        }
-
-        /* --- HOME VIEW: HERO SLIDER HERO BANNER --- */
-        .hero-banner {
-            position: relative;
-            width: 100%;
-            height: 88vh;
-            background-color: #f5f5f5;
-        }
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .hero-content-overlay {
-            position: absolute;
-            bottom: 12%;
-            left: 6%;
-            z-index: 10;
-        }
-        .hero-shop-btn {
-            background-color: rgba(30, 30, 30, 0.85);
-            color: #ffffff;
-            border: none;
-            padding: 14px 36px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .hero-shop-btn:hover {
-            background-color: #000000;
-        }
-
-        /* --- HOME VIEW: CATALOG SYSTEM --- */
-        .catalog-wrapper {
-            padding: 70px 50px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .catalog-title {
-            text-align: center;
-            font-size: 24px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            font-weight: 300;
-        }
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-        }
-        .product-card {
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-        }
-        .image-frame {
-            width: 100%;
-            height: 420px;
-            overflow: hidden;
-            background: #fafafa;
-            margin-bottom: 18px;
-            position: relative;
-        }
-        .image-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .product-card:hover .image-frame img {
-            transform: scale(1.04);
-        }
-        .item-meta-title {
-            font-size: 14px;
-            letter-spacing: 1px;
-            color: #111111;
-            margin-bottom: 6px;
-            font-weight: 400;
-            text-transform: capitalize;
-        }
-        .item-meta-price {
-            font-size: 14px;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 14px;
-        }
-        .action-buy-btn {
-            width: 100%;
-            padding: 13px;
-            background-color: #000000;
-            color: #ffffff;
-            border: 1px solid #000000;
-            text-align: center;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-        .action-buy-btn:hover {
-            background-color: #222222;
-        }
-
-        /* --- CHECKOUT VIEW LAYOUT MODIFIERS --- */
-        .checkout-view-wrapper {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column-reverse;
-        }
-        .checkout-main-panel {
-            flex: 1.25;
-            padding: 45px 50px;
-            background: #ffffff;
-        }
-        .checkout-form-box {
-            max-width: 540px;
-            margin-left: auto;
-        }
-        .checkout-sidebar-panel {
-            flex: 1;
-            background-color: #fafafa;
-            border-left: 1px solid #e6e6e6;
-            padding: 45px 50px;
-        }
-        .checkout-sidebar-box {
-            max-width: 390px;
-            margin-right: auto;
-        }
-
-        /* --- CLONE VIEW INPUT STYLES --- */
-        .section-header-row {
-            font-size: 17px;
-            font-weight: 500;
-            margin: 24px 0 14px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #111;
-        }
-        .input-element-row {
-            margin-bottom: 11px;
-        }
-        input[type="text"], input[type="email"], input[type="tel"], select {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #d9d9d9;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #ffffff;
-            color: #333;
-        }
-        input:focus, select:focus {
-            border-color: #000000;
-            outline: none;
-            box-shadow: 0 0 0 1px #000000;
-        }
-        .flex-input-grid {
-            display: flex;
-            gap: 11px;
-        }
-        .flex-input-grid .input-element-row {
-            flex: 1;
-        }
-
-        /* --- CLONE VERIFIED STYLING CHECKBOXES --- */
-        .custom-ui-check {
-            display: flex;
-            align-items: center;
-            margin: 12px 0;
-            font-size: 13px;
-            color: #333333;
-        }
-        .custom-ui-check input {
-            margin-right: 9px;
-            accent-color: #000000;
-            width: 15px;
-            height: 15px;
-        }
-
-        .shipping-locked-infobox {
-            background-color: #f5f5f5;
-            border-radius: 4px;
-            padding: 16px;
-            text-align: center;
-            font-size: 13px;
-            color: #666666;
-            border: 1px solid #e1e1e1;
-        }
-
-        /* --- EXACT PALLAVI AGARWAL PAYMENT BOX COMPONENT --- */
-        .premium-payment-block {
-            border: 1px solid #d9d9d9;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 15px;
-        }
-        .premium-payment-header {
-            background-color: #fafafa;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #d9d9d9;
-        }
-        .payment-label-container {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .payment-label-container input {
-            margin-right: 12px;
-            accent-color: #000000;
-            width: 16px;
-            height: 16px;
-        }
-        .payment-logo-badges {
-            font-size: 11px;
-            color: #666666;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        .premium-payment-body-dropdown {
-            background-color: #f4f4f4;
-            padding: 18px;
-            font-size: 13px;
-            color: #555555;
-            line-height: 1.5;
-            text-align: center;
-            border-bottom: 1px solid #d9d9d9;
-        }
-        .premium-cod-row {
-            padding: 16px;
-            background-color: #ffffff;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-        }
-        .premium-cod-row input {
-            margin-right: 12px;
-            accent-color: #000000;
-            width: 16px;
-            height: 16px;
-        }
-
-        /* --- EXACT PALLAVI AGARWAL SIDEBAR SUMMARY SYSTEM --- */
-        .sidebar-item-flexrow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 22px;
-            padding-bottom: 22px;
-            border-bottom: 1px solid #e6e6e6;
-        }
-        .sidebar-item-leftbox {
-            display: flex;
-            align-items: center;
-        }
-        .sidebar-img-wrapper {
-            position: relative;
-            width: 65px;
-            height: 65px;
-            background: #ffffff;
-            border: 1px solid #e1e1e1;
-            border-radius: 6px;
-        }
-        .sidebar-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        .sidebar-badge-count {
-            position: absolute;
-            top: -7px;
-            right: -7px;
-            background-color: rgba(100, 100, 100, 0.9);
-            color: #ffffff;
-            border-radius: 50%;
-            width: 19px;
-            height: 19px;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .sidebar-item-title-txt {
-            font-size: 14px;
-            font-weight: 500;
-            margin-left: 16px;
-            color: #222;
-        }
-        .sidebar-item-price-txt {
-            font-size: 14px;
-            font-weight: 500;
-            color: #000;
-        }
-
-        .math-breakdown-panel {
-            font-size: 14px;
-            color: #555555;
-        }
-        .math-flex-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 11px;
-        }
-        .math-master-total-line {
-            display: flex;
-            justify-content: space-between;
-            font-size: 19px;
-            font-weight: 600;
-            color: #000000;
-            margin-top: 22px;
-            padding-top: 22px;
-            border-top: 1px solid #e6e6e6;
-        }
-        .math-currency-flag {
-            font-size: 12px;
-            color: #777777;
-            font-weight: 400;
-            margin-right: 6px;
-        }
-
-        /* --- CLONE BLACK SUBMIT PILL BUTTON --- */
-        .master-submit-btn-pay {
-            width: 100%;
-            background-color: #000000;
-            color: #ffffff;
-            border: none;
-            padding: 18px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 24px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: background 0.2s;
-        }
-        .master-submit-btn-pay:hover {
-            background-color: #222222;
-        }
-
-        /* --- FLOATING SYSTEMS WHATSAPP --- */
-        .whatsapp-fixed-icon {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background-color: #25d366;
-            color: #ffffff;
-            border-radius: 50%;
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 2000;
-        }
-
-        /* --- RESPONSIVE DESKTOP ADAPTER MEDIA QUERIES --- */
-        @media (min-width: 768px) {
-            .checkout-view-wrapper {
-                flex-direction: row;
-            }
-            .checkout-main-panel {
-                padding: 55px 70px 55px 50px;
-            }
-            .checkout-sidebar-panel {
-                padding: 55px 50px 55px 70px;
-            }
-        }
-        @media (max-width: 768px) {
-            .navbar { padding: 15px 20px; }
-            .nav-links { display: none; }
-            .brand-logo { font-size: 17px; letter-spacing: 3px; }
-            .catalog-wrapper { padding: 40px 20px; }
-            .image-frame { height: 340px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Luxury — Premium Tailoring Boutique</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- EmailJS lets this static site send order emails without a backend server. See README for setup. -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
 
-    <div id="home-view-container" class="page-view active-view">
-        
-        <div class="announcement-bar">New Collection Launched — Worldwide Shipping</div>
+<div class="announcement-bar">Custom Tailoring · Handcrafted In Pune · Made To Order</div>
 
-        <header class="navbar">
-            <ul class="nav-links">
-                <li><a href="#">Ready To Wear</a></li>
-                <li><a href="#">Luxury Edit</a></li>
-            </ul>
-            
-            <a href="#" class="brand-logo">LITTLE LUXURY</a>
-            
-            <div class="nav-icons">
-                <button class="nav-icon-btn">
-                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </button>
-                <button class="nav-icon-btn">
-                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                </button>
-            </div>
-        </header>
-
-        <section class="hero-banner">
-            <img class="hero-image" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600" alt="Collection Cover Image">
-            <div class="hero-content-overlay">
-                <button class="hero-shop-btn" onclick="document.getElementById('catalog-anchor').scrollIntoView({behavior: 'smooth'});">Shop The Look</button>
-            </div>
-        </section>
-
-        <main class="catalog-wrapper" id="catalog-anchor">
-            <h2 class="catalog-title">Boutique Collection</h2>
-            
-            <div class="grid-layout">
-                <div class="product-card">
-                    <div class="image-frame">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600" alt="Premium Dress Pack">
-                    </div>
-                    <h3 class="item-meta-title">Premium Indian Ethnic Wear</h3>
-                    <p class="item-meta-price">₹1,000.00</p>
-                    <button class="action-buy-btn" onclick="initiateCheckout('Premium Indian Ethnic Wear', '1000', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600')">Buy Product</button>
-                </div>
-
-                <div class="product-card">
-                    <div class="image-frame">
-                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600" alt="Western Premium Suit">
-                    </div>
-                    <h3 class="item-meta-title">Handcrafted Designer Suit</h3>
-                    <p class="item-meta-price">₹1,500.00</p>
-                    <button class="action-buy-btn" onclick="initiateCheckout('Handcrafted Designer Suit', '1500', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600')">Buy Product</button>
-                </div>
-
-                <div class="product-card">
-                    <div class="image-frame">
-                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=600" alt="Luxury Traditional Blend">
-                    </div>
-                    <h3 class="item-meta-title">Luxury Silk Wedding Dress</h3>
-                    <p class="item-meta-price">₹2,500.00</p>
-                    <button class="action-buy-btn" onclick="initiateCheckout('Luxury Silk Wedding Dress', '2500', 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=600')">Buy Product</button>
-                </div>
-            </div>
-        </main>
+<header class="main-header">
+    <div class="header-top-row">
+        <div class="header-spacer"></div>
+        <a href="#" class="logo" onclick="switchTab('new-arrival')">LITTLE LUXURY</a>
+        <div class="nav-icons">
+            <button class="nav-icon-btn" onclick="openCart()" aria-label="Open cart">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span class="cart-count-badge" id="cart-count-badge" style="display:none;">0</span>
+            </button>
+        </div>
     </div>
+    <nav class="nav-tabs">
+        <button class="tab-link active" data-tab="new-arrival" onclick="switchTab('new-arrival')">New Arrival</button>
+        <button class="tab-link" data-tab="location" onclick="switchTab('location')">Location</button>
+        <button class="tab-link" data-tab="contact" onclick="switchTab('contact')">Contact Support</button>
+    </nav>
+</header>
 
+<!-- ============ TAB 1: NEW ARRIVAL ============ -->
+<section id="tab-new-arrival" class="tab-content active">
 
-    <div id="checkout-view-container" class="page-view">
-        <div class="checkout-view-wrapper">
-            
-            <div class="checkout-main-panel">
-                <div class="checkout-form-box">
-                    <a href="javascript:void(0)" onclick="returnToHome()" class="brand-header">LITTLE LUXURY</a>
-
-                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                        
-                        <input type="hidden" name="_subject" value="New Store Order Received!">
-                        <input type="hidden" id="sys-hidden-name" name="Item_Name" value="">
-                        <input type="hidden" id="sys-hidden-price" name="Total_Paid" value="">
-                        <input type="hidden" name="_next" value="https://pages.razorpay.com/your_custom_payment_link">
-
-                        <div class="section-header-row">
-                            <span>Contact</span>
-                            <a href="#" class="login-link">Sign in</a>
-                        </div>
-                        <div class="input-element-row">
-                            <input type="email" name="Customer_Email" placeholder="Email" required>
-                        </div>
-                        <div class="custom-ui-check">
-                            <input type="checkbox" name="Marketing_Opt_In" id="mkt-opt" checked>
-                            <label for="mkt-opt">Email me with news and offers</label>
-                        </div>
-
-                        <div class="section-header-row">Delivery</div>
-                        <div class="input-element-row">
-                            <select name="Delivery_Country">
-                                <option value="India">India</option>
-                            </select>
-                        </div>
-                        <div class="flex-input-grid">
-                            <div class="input-element-row"><input type="text" name="First_Name" placeholder="First name" required></div>
-                            <div class="input-element-row"><input type="text" name="Last_Name" placeholder="Last name" required></div>
-                        </div>
-                        <div class="input-element-row">
-                            <input type="text" name="Address_Line_1" placeholder="Address" required>
-                        </div>
-                        <div class="input-element-row">
-                            <input type="text" name="Address_Line_2" placeholder="Apartment, suite, etc. (optional)">
-                        </div>
-                        <div class="flex-input-grid">
-                            <div class="input-element-row"><input type="text" name="City" placeholder="City" required></div>
-                            <div class="input-element-row">
-                                <select name="State">
-                                    <option value="Maharashtra">Maharashtra</option>
-                                    <option value="Delhi">Delhi</option>
-                                    <option value="Karnataka">Karnataka</option>
-                                </select>
-                            </div>
-                            <div class="input-element-row"><input type="text" name="Pincode" placeholder="PIN code" required></div>
-                        </div>
-                        <div class="input-element-row">
-                            <input type="tel" name="Customer_Phone" placeholder="Phone" required>
-                        </div>
-
-                        <div class="section-header-row">Shipping method</div>
-                        <div class="shipping-locked-infobox">
-                            Enter your shipping address to view available shipping methods.
-                        </div>
-
-                        <div class="section-header-row">Payment</div>
-                        <p style="font-size: 12px; color: #666666; margin-top:-6px; margin-bottom:14px;">All transactions are secure and encrypted.</p>
-                        
-                        <div class="premium-payment-block">
-                            <div class="premium-payment-header">
-                                <div class="payment-label-container">
-                                    <input type="radio" name="Selected_Payment_Route" value="Online Gateway" checked>
-                                    <span>Razorpay Secure (UPI, Cards, Int'l Cards, Wallets)</span>
-                                </div>
-                                <div class="payment-logo-badges">UPI VISA MC +18</div>
-                            </div>
-                            <div class="premium-payment-body-dropdown">
-                                You'll be redirected to Razorpay Secure (UPI, Cards, Int'l Cards, Wallets) to complete your purchase safely.
-                            </div>
-                            <div class="premium-cod-row">
-                                <input type="radio" name="Selected_Payment_Route" value="COD">
-                                <span>Cash on Delivery (COD)</span>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="master-submit-btn-pay">Pay now</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="checkout-sidebar-panel">
-                <div class="checkout-sidebar-box">
-                    
-                    <div class="sidebar-item-flexrow">
-                        <div class="sidebar-item-leftbox">
-                            <div class="sidebar-img-wrapper">
-                                <img id="sys-checkout-img" src="" alt="Selected Product Image">
-                                <div class="sidebar-badge-count">1</div>
-                            </div>
-                            <div id="sys-checkout-title" class="sidebar-item-title-txt">Loading Item...</div>
-                        </div>
-                        <div id="sys-checkout-item-price" class="sidebar-item-price-txt">₹0.00</div>
-                    </div>
-
-                    <div class="math-breakdown-panel">
-                        <div class="math-flex-line">
-                            <span>Subtotal</span>
-                            <span id="sys-checkout-subtotal">₹0.00</span>
-                        </div>
-                        <div class="math-flex-line">
-                            <span>Shipping</span>
-                            <span style="font-size: 12px; color: #666666;">Calculated next step</span>
-                        </div>
-                        <div class="math-master-total-line">
-                            <span>Total</span>
-                            <span><span class="math-currency-flag">INR</span><span id="sys-checkout-grand-total">₹0.00</span></span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
+    <div class="hero-banner">
+        <img class="hero-image" src="images/1000003489.jpg" alt="Little Luxury new collection">
+        <div class="hero-overlay">
+            <h2>THE NEW ARRIVAL EDIT</h2>
+            <button class="btn-explore" onclick="document.getElementById('new-arrival-grid').scrollIntoView({behavior:'smooth'});">Shop New Arrivals</button>
         </div>
     </div>
 
+    <div class="shop-container">
+        <h2 class="page-title" id="new-arrival-grid">New Arrivals</h2>
+        <div class="shop-grid" id="product-grid"><!-- products injected by script.js --></div>
+    </div>
 
-    <a href="https://wa.me/919322289023" class="whatsapp-fixed-icon" target="_blank">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="color:#ffffff;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.863-9.736.001-2.599-1.01-5.043-2.848-6.882-1.839-1.838-4.286-2.849-6.887-2.85-5.447 0-9.872 4.37-9.875 9.738-.001 1.75.466 3.46 1.353 4.988l-.995 3.635 3.73-.966z"></path></svg>
-    </a>
+    <div class="about-section">
+        <img class="craft-photo" src="images/1000003491.jpg" alt="Tailoring craftsmanship at Little Luxury">
+        <h2 class="page-title" style="margin-bottom:20px;">About Us</h2>
+        <p>Little Luxury is a made-to-order tailoring studio, cutting and finishing every piece by hand from carefully sourced fabric. Each garment carries the same attention a couture atelier gives its clients — fitted to you, not to a rack.</p>
+        <p>We work in small batches so quality never gets rushed, and every order is packed and checked personally before it leaves our studio.</p>
+        <div class="about-notice">
+            <strong>Please note</strong>
+            We currently accept prepaid orders only via secure online payment. We do not offer Cash on Delivery (COD) on any order.
+        </div>
+    </div>
+</section>
 
+<!-- ============ TAB 2: LOCATION ============ -->
+<section id="tab-location" class="tab-content">
+    <div class="location-wrapper">
+        <h2 class="page-title">Visit Our Studio</h2>
+        <p class="location-address">
+            Vaishnavi Ladies Tailor Boutique<br>
+            (Little Luxury Studio)<br>
+            Pune, Maharashtra, India
+        </p>
+        <a class="btn-location" href="https://maps.app.goo.gl/pTJGUhWLFJh296tC8" target="_blank" rel="noopener">Get Directions</a>
+        <div class="map-frame-box">
+            <iframe src="https://www.google.com/maps?q=Vaishnavi+Ladies+Tailor+Butique,18.5108102,73.8586696&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
 
-    <script>
-        // Smoothly swap screens to show Checkout Page with custom variables
-        function initiateCheckout(name, price, imageSrc) {
-            // Compute clean localized pricing structure strings
-            const parsedPrice = parseFloat(price);
-            const formattedCurrencyString = "₹" + parsedPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+<!-- ============ TAB 3: CONTACT SUPPORT ============ -->
+<section id="tab-contact" class="tab-content">
+    <div class="contact-wrapper">
+        <h2 class="page-title">Contact Support</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon-circle">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <h4>Call Us</h4>
+                <a href="tel:+919322289023">+91 93222 89023</a>
+                <a href="tel:+919359337552">+91 93593 37552</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon-circle">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <h4>Email Us</h4>
+                <a href="mailto:shailendranazare1@gmail.com">shailendranazare1@gmail.com</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon-circle">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.863-9.736.001-2.599-1.01-5.043-2.848-6.882-1.839-1.838-4.286-2.849-6.887-2.85-5.447 0-9.872 4.37-9.875 9.738-.001 1.75.466 3.46 1.353 4.988l-.995 3.635 3.73-.966z"></path></svg>
+                </div>
+                <h4>WhatsApp</h4>
+                <a href="https://wa.me/919322289023" target="_blank" rel="noopener">+91 93222 89023</a>
+                <a href="https://wa.me/919359337552" target="_blank" rel="noopener">+91 93593 37552</a>
+            </div>
+        </div>
 
-            // Apply modifications straight to Sidebar UI display blocks
-            document.getElementById('sys-checkout-title').innerText = name;
-            document.getElementById('sys-checkout-item-price').innerText = formattedCurrencyString;
-            document.getElementById('sys-checkout-subtotal').innerText = formattedCurrencyString;
-            document.getElementById('sys-checkout-grand-total').innerText = formattedCurrencyString;
-            document.getElementById('sys-checkout-img').src = imageSrc;
+        <div class="instagram-follow-box">
+            <h4>Follow Us On Instagram</h4>
+            <img class="instagram-qr-image" src="images/instagram.jpg" alt="Scan to follow @litt.leluxy on Instagram">
+        </div>
+    </div>
+</section>
 
-            // Sync hidden inputs for Formspree email data fields
-            document.getElementById('sys-hidden-name').value = name;
-            document.getElementById('sys-hidden-price').value = formattedCurrencyString;
+<!-- ============ CHECKOUT VIEW ============ -->
+<div id="checkout-view-container" class="page-view" style="display:none;">
+    <div class="checkout-view-wrapper">
+        <div class="checkout-main-panel">
+            <div class="checkout-form-box">
+                <span class="checkout-back-link" onclick="closeCheckout()">← Back to shopping</span>
 
-            // Switch display views seamlessly
-            document.getElementById('home-view-container').classList.remove('active-view');
-            document.getElementById('checkout-view-container').classList.add('active-view');
-            
-            // Scroll right to the top of the form layout window automatically
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
+                <div class="section-header-row">Contact Details</div>
+                <div class="input-element-row"><input type="text" id="chk-name" placeholder="Full name" required></div>
+                <div class="input-element-row"><input type="email" id="chk-email" placeholder="Email" required></div>
+                <div class="input-element-row"><input type="tel" id="chk-phone" placeholder="Phone" required></div>
 
-        // Return button option in case a client wants to continue browsing the shop
-        function returnToHome() {
-            document.getElementById('checkout-view-container').classList.remove('active-view');
-            document.getElementById('home-view-container').classList.add('active-view');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-    </script>
+                <div class="section-header-row">Delivery Address</div>
+                <div class="input-element-row"><input type="text" id="chk-address" placeholder="Address" required></div>
+                <div class="flex-input-grid">
+                    <div class="input-element-row"><input type="text" id="chk-city" placeholder="City" required></div>
+                    <div class="input-element-row"><input type="text" id="chk-state" placeholder="State" required></div>
+                    <div class="input-element-row"><input type="text" id="chk-pincode" placeholder="PIN code" required></div>
+                </div>
 
+                <div class="section-header-row">Payment</div>
+                <div class="premium-payment-block">
+                    <div class="premium-payment-header">
+                        <div class="payment-label-container">
+                            <input type="radio" name="pay-method" checked disabled>
+                            <span>Razorpay Secure — UPI, Cards, Netbanking, Wallets</span>
+                        </div>
+                        <div class="payment-logo-badges">UPI · VISA · MC</div>
+                    </div>
+                    <div class="premium-payment-body-dropdown">
+                        You'll be redirected to our secure Razorpay payment page to complete your purchase.
+                    </div>
+                </div>
+                <p class="no-cod-note">We do not offer Cash on Delivery. All orders are prepaid online.</p>
+
+                <button class="master-submit-btn-pay" id="pay-now-btn" onclick="payNow()">Pay Now via Razorpay</button>
+
+                <div class="confirm-payment-box" id="confirm-payment-box" style="display:none;">
+                    <p>Completed your payment on the Razorpay page? Tap below to confirm your order — we'll notify you and start packing right away.</p>
+                    <button class="btn-confirm-paid" onclick="confirmPayment()">I've Completed My Payment</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-sidebar-panel">
+            <div class="checkout-sidebar-box">
+                <div id="checkout-sidebar-items"><!-- injected --></div>
+                <div class="math-breakdown-panel">
+                    <div class="math-flex-line"><span>Subtotal</span><span id="chk-subtotal">₹0.00</span></div>
+                    <div class="math-flex-line"><span>Shipping</span><span style="font-size:12px;color:#666666;">Free</span></div>
+                    <div class="math-master-total-line"><span>Total</span><span><span class="math-currency-flag">INR</span><span id="chk-grand-total">₹0.00</span></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ ORDER SUCCESS MODAL ============ -->
+<div class="modal" id="success-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeSuccessModal()">&times;</span>
+        <div class="receipt-success-icon">✓</div>
+        <div class="receipt-headline">Order Confirmation Received</div>
+        <div class="receipt-sub">We've received your confirmation and will begin packing shortly.</div>
+
+        <div class="formal-receipt-box" id="receipt-box"><!-- injected --></div>
+
+        <div class="confirmation-action-box">
+            <p>For your records, you can also send this receipt to us directly:</p>
+            <a href="#" id="receipt-whatsapp-link" class="btn-whatsapp-send" target="_blank" rel="noopener">Send Order Details On WhatsApp</a>
+            <a href="#" id="receipt-email-link" class="btn-email-send">Email This Order To Us</a>
+        </div>
+
+        <div class="modal-footer-note">
+            Questions about your order? Call +91 93222 89023 / +91 93593 37552 or email shailendranazare1@gmail.com.
+        </div>
+    </div>
+</div>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+        <h3>Your Cart</h3>
+        <button class="cart-close-btn" onclick="closeCart()">&times;</button>
+    </div>
+    <div class="cart-items-list" id="cart-items-list"><!-- injected --></div>
+    <div class="cart-drawer-footer">
+        <div class="cart-subtotal-row"><span>Subtotal</span><span id="cart-subtotal-amount">₹0.00</span></div>
+        <button class="btn-checkout-cart" onclick="openCheckoutFromCart()">Checkout</button>
+        <p class="cart-cod-note">Prepaid orders only — Cash on Delivery is not available.</p>
+    </div>
+</div>
+
+<a href="https://wa.me/919322289023" class="whatsapp-fixed-icon" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="color:#ffffff;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.863-9.736.001-2.599-1.01-5.043-2.848-6.882-1.839-1.838-4.286-2.849-6.887-2.85-5.447 0-9.872 4.37-9.875 9.738-.001 1.75.466 3.46 1.353 4.988l-.995 3.635 3.73-.966z"></path></svg>
+</a>
+
+<footer class="trust-footer">
+    <p>LITTLE LUXURY — Handcrafted Tailoring, Pune</p>
+    <p>© 2026 Little Luxury. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
-
